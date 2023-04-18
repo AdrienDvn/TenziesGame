@@ -15,7 +15,7 @@ export default function App() {
     for (let i = 0; i < 10; i++) {
       newDice.push({
         value: Math.floor(Math.random() * 6) + 1,
-        isHeld : false,   // la ça devient chaud pour moic'est tendouche
+        isHeld : true,   // la ça devient chaud pour moic'est tendouche
         id: nanoid()
       })
     }
@@ -29,14 +29,15 @@ export default function App() {
   }
 
   const diceElements = dice.map(die=> (
-    <Die key={die.id} value={die.value}/>
+    <Die key={die.id} value={die.value} isHeld={die.isHeld}/>
   ))
+
 
 
   return (
     <main>
       <div className='dice--container'>
-      {diceElements}
+        {diceElements}
       </div>
       <button onClick={rollDice} className='dice--btn'>Roll</button>
     </main>
