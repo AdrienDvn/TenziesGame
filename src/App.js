@@ -15,7 +15,7 @@ export default function App() {
     for (let i = 0; i < 10; i++) {
       newDice.push({
         value: Math.floor(Math.random() * 6) + 1,
-        isHeld : true,   // la ça devient chaud pour moic'est tendouche
+        isHeld : false,   // la ça devient chaud pour moic'est tendouche
         id: nanoid()
       })
     }
@@ -28,8 +28,12 @@ export default function App() {
     setDice(allNewDice())
   }
 
+  function holdDice(id) {
+    console.log(id);
+  }
+
   const diceElements = dice.map(die=> (
-    <Die key={die.id} value={die.value} isHeld={die.isHeld}/>
+    <Die key={die.id} value={die.value} isHeld={die.isHeld} holdDice={()=> holdDice(die.id)}/>
   ))
 
 
