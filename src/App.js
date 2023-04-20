@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import './App.css';
 import Die from './components/Die';
-
+import Confetti from 'react-confetti';
 import {nanoid} from 'nanoid'
 
 export default function App() {
@@ -20,6 +20,7 @@ export default function App() {
       console.log("you won !");
     }
   }, [dice])
+  //this useEffect function is the hardest part, try to rewrite it from scratch :)
 
   function generateNewDie() {
     return {
@@ -39,14 +40,12 @@ export default function App() {
     )
   }
 
-
   function rollDice() {
     setDice(oldDice => oldDice.map(die => {
       return die.isHeld ?
         die : generateNewDie()
     }))
   }
-
 
   const diceElements = dice.map(die=> (
     <Die
@@ -72,8 +71,14 @@ export default function App() {
       <p className='instructions'>Roll until all dice are the same, Click each die to freeze it as its current value between rolls. </p>
       <div className='dice--container'>
         {diceElements}
+        {tenzies === true ? <Confetti/> :''}
       </div>
-      <button onClick={rollDice} className='dice--btn'>Roll</button>
+      <button
+        onClick={rollDice}
+        className='dice--btn'
+      >
+        {tenzies === true ? 'New Game':'Roll'}
+      </button>
     </main>
   );
 }
