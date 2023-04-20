@@ -25,7 +25,7 @@ export default function App() {
   function generateNewDie() {
     return {
       value: Math.floor(Math.random() * 6) + 1,
-      isHeld : false,   // la ça devient chaud pour moic'est tendouche
+      isHeld : false,
       id: nanoid()
     }
   }
@@ -41,10 +41,16 @@ export default function App() {
   }
 
   function rollDice() {
-    setDice(oldDice => oldDice.map(die => {
-      return die.isHeld ?
+    if(!tenzies) {
+      setDice(oldDice => oldDice.map(die => {
+        return die.isHeld ?
         die : generateNewDie()
-    }))
+      }))
+    } else {
+      setTenzies(false)
+      setDice(allNewDice)
+    }
+
   }
 
   const diceElements = dice.map(die=> (
